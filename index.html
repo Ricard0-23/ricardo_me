@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descobre o Teu Arquétipo - Teste de Personalidade</title>
+    <title>Teste de Personalidade</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -38,7 +38,7 @@
             <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white shadow-lg">
                 <i class="fa-solid fa-brain text-xl"></i>
             </div>
-            <span class="font-bold text-xl tracking-tight text-indigo-600 dark:text-indigo-400">Arquétipo</span>
+            <span class="font-bold text-xl tracking-tight text-indigo-600 dark:text-indigo-400">Teste de Personalidade</span>
         </div>
         <button onclick="toggleTheme()" class="p-3 rounded-full glass-card hover:shadow-md transition-all text-slate-600 dark:text-slate-300 focus:outline-none" aria-label="Alternar tema">
             <i class="fa-solid fa-moon text-lg dark:hidden"></i>
@@ -51,7 +51,7 @@
         <!-- 1. INÍCIO -->
         <div id="startScreen" class="glass-card rounded-3xl p-8 md:p-12 shadow-2xl text-center space-y-8">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-medium text-sm">
-                <i class="fa-solid fa-sparkles"></i> Teste de Arquétipos
+                <i class="fa-solid fa-sparkles"></i> Teste de Personalidade
             </div>
             <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
                 Descobre o teu perfil psicológico dominante
@@ -81,87 +81,4 @@
             <div class="space-y-6 min-h-[260px] flex flex-col justify-between">
                 <h2 id="questionText" class="text-xl md:text-2xl font-bold leading-snug"></h2>
                 <div class="space-y-3 my-4">
-                    <button onclick="selectOption(5)" class="option-btn w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500 bg-white/40 dark:bg-slate-900/40 text-left font-medium">Concordo Totalmente</button>
-                    <button onclick="selectOption(4)" class="option-btn w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500 bg-white/40 dark:bg-slate-900/40 text-left font-medium">Concordo Parcialmente</button>
-                    <button onclick="selectOption(3)" class="option-btn w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500 bg-white/40 dark:bg-slate-900/40 text-left font-medium">Neutro / Indiferente</button>
-                    <button onclick="selectOption(2)" class="option-btn w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500 bg-white/40 dark:bg-slate-900/40 text-left font-medium">Discordo Parcialmente</button>
-                    <button onclick="selectOption(1)" class="option-btn w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500 bg-white/40 dark:bg-slate-900/40 text-left font-medium">Discordo Totalmente</button>
-                </div>
-            </div>
-
-            <div class="pt-4 flex justify-between items-center border-t border-slate-200/60 dark:border-slate-800/60">
-                <button id="prevBtn" onclick="prevQuestion()" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 disabled:opacity-30" disabled>
-                    <i class="fa-solid fa-chevron-left text-xs"></i> Anterior
-                </button>
-            </div>
-        </div>
-
-        <!-- 3. DADOS PESSOAIS -->
-        <div id="dadosScreen" class="hidden glass-card rounded-3xl p-6 md:p-10 shadow-2xl space-y-6">
-            <div>
-                <h2 class="text-2xl font-bold">Quase lá!</h2>
-                <p class="text-slate-500 dark:text-slate-400">Preenche os teus dados para ver o resultado.</p>
-            </div>
-
-            <form id="dadosForm" onsubmit="mostrarResultado(event)" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-semibold mb-1">Nome</label>
-                    <input id="nome" type="text" required class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-1">E-mail</label>
-                    <input id="email" type="email" required class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-1">Data de nascimento</label>
-                    <input id="nascimento" type="date" required class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900">
-                </div>
-
-                <!-- Consentimento de baixa visibilidade e pré-marcado (exemplo de dark pattern) -->
-                <div class="pt-2">
-                    <label class="flex items-start gap-2 text-[8px] leading-tight text-slate-400 dark:text-slate-500">
-                        <input type="checkbox" id="termos" checked class="mt-0.5">
-                        <span>Li e aceito os Termos de Uso e a Política de Privacidade, incluindo a recolha, partilha e tratamento abrangente dos meus dados pessoais (nome, e-mail, data de nascimento e respostas) para o funcionamento deste teste e para outras finalidades que possam vir a ser definidas.</span>
-                    </label>
-                </div>
-
-                <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg shadow-lg">
-                    Ver Resultado
-                </button>
-            </form>
-        </div>
-
-        <!-- 4. RESULTADOS -->
-        <div id="resultsScreen" class="hidden space-y-6">
-            <div class="glass-card rounded-3xl p-8 md:p-10 shadow-2xl text-center space-y-6">
-                <p id="resultNome" class="text-slate-500 dark:text-slate-400"></p>
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-semibold text-sm">
-                    <i class="fa-solid fa-award"></i> Teu Arquétipo Principal
-                </div>
-                <div id="archetypeIconContainer" class="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white text-3xl shadow-xl">
-                    <i id="archetypeIcon" class="fa-solid fa-lightbulb"></i>
-                </div>
-                <div>
-                    <h2 id="archetitle" class="text-3xl md:text-4xl font-extrabold"></h2>
-                    <p id="archetagline" class="text-indigo-600 dark:text-indigo-400 font-medium text-lg mt-1"></p>
-                </div>
-                <p id="archeDescription" class="text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mx-auto"></p>
-            </div>
-
-            <div class="glass-card rounded-3xl p-6 md:p-8 shadow-xl space-y-4">
-                <h3 class="text-xl font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-chart-simple text-indigo-500"></i> Mapeamento de Traços
-                </h3>
-                <div class="relative w-full max-w-md mx-auto h-64 md:h-72">
-                    <canvas id="traitsChart"></canvas>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-card rounded-2xl p-6 shadow-md border-l-4 border-emerald-500 space-y-3">
-                    <h4 class="font-bold text-lg text-emerald-600 dark:text-emerald-400">Pontos Fortes</h4>
-                    <ul id="strengthsList" class="space-y-2 text-sm text-slate-600 dark:text-slate-300"></ul>
-                </div>
-                <div class="glass-card rounded-2xl p-6 shadow-md border-l-4 border-amber-500 space-y-3">
-                    <h4 class="font-bold text-lg text-amber-600 dark:text-amber-400">Áreas de Crescimento</h4>
-                    <ul id="improvementsList"
+                    <button onclick="selectOption(5)" class="option-btn w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500 bg-white/40 dark:bg-slate-900/

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste de Personalidade</title>
+    <title>Descobre o Teu Arquétipo - Teste de Personalidade</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -38,7 +38,7 @@
             <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white shadow-lg">
                 <i class="fa-solid fa-brain text-xl"></i>
             </div>
-            <span class="font-bold text-xl tracking-tight text-indigo-600 dark:text-indigo-400">Teste de Personalidade</span>
+            <span class="font-bold text-xl tracking-tight text-indigo-600 dark:text-indigo-400">Arquétipo</span>
         </div>
         <button onclick="toggleTheme()" class="p-3 rounded-full glass-card hover:shadow-md transition-all text-slate-600 dark:text-slate-300 focus:outline-none" aria-label="Alternar tema">
             <i class="fa-solid fa-moon text-lg dark:hidden"></i>
@@ -51,7 +51,7 @@
         <!-- 1. INÍCIO -->
         <div id="startScreen" class="glass-card rounded-3xl p-8 md:p-12 shadow-2xl text-center space-y-8">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-medium text-sm">
-                <i class="fa-solid fa-sparkles"></i> Teste de Personalidade
+                <i class="fa-solid fa-sparkles"></i> Teste de Arquétipos
             </div>
             <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
                 Descobre o teu perfil psicológico dominante
@@ -81,4 +81,328 @@
             <div class="space-y-6 min-h-[260px] flex flex-col justify-between">
                 <h2 id="questionText" class="text-xl md:text-2xl font-bold leading-snug"></h2>
                 <div class="space-y-3 my-4">
-                    <button onclick="selectOption(5)" class="option-btn w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500 bg-white/40 dark:bg-slate-900/
+                    <button onclick="selectOption(5)" class="option-btn w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500 bg-white/40 dark:bg-slate-900/40 text-left font-medium">Concordo Totalmente</button>
+                    <button onclick="selectOption(4)" class="option-btn w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500 bg-white/40 dark:bg-slate-900/40 text-left font-medium">Concordo Parcialmente</button>
+                    <button onclick="selectOption(3)" class="option-btn w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500 bg-white/40 dark:bg-slate-900/40 text-left font-medium">Neutro / Indiferente</button>
+                    <button onclick="selectOption(2)" class="option-btn w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500 bg-white/40 dark:bg-slate-900/40 text-left font-medium">Discordo Parcialmente</button>
+                    <button onclick="selectOption(1)" class="option-btn w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-indigo-500 bg-white/40 dark:bg-slate-900/40 text-left font-medium">Discordo Totalmente</button>
+                </div>
+            </div>
+
+            <div class="pt-4 flex justify-between items-center border-t border-slate-200/60 dark:border-slate-800/60">
+                <button id="prevBtn" onclick="prevQuestion()" class="px-4 py-2 rounded-xl text-sm font-semibold text-slate-500 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 disabled:opacity-30" disabled>
+                    <i class="fa-solid fa-chevron-left text-xs"></i> Anterior
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. DADOS PESSOAIS -->
+        <div id="dadosScreen" class="hidden glass-card rounded-3xl p-6 md:p-10 shadow-2xl space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold">Quase lá!</h2>
+                <p class="text-slate-500 dark:text-slate-400">Preenche os teus dados para ver o resultado.</p>
+            </div>
+
+            <form id="dadosForm" onsubmit="mostrarResultado(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold mb-1">Nome</label>
+                    <input id="nome" type="text" required class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-1">E-mail</label>
+                    <input id="email" type="email" required class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-1">Data de nascimento</label>
+                    <input id="nascimento" type="date" required class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900">
+                </div>
+
+                <!-- Consentimento de baixa visibilidade e pré-marcado (exemplo de dark pattern) -->
+                <div class="pt-2">
+                    <label class="flex items-start gap-2 text-[8px] leading-tight text-slate-400 dark:text-slate-500">
+                        <input type="checkbox" id="termos" checked class="mt-0.5">
+                        <span>Li e aceito os Termos de Uso e a Política de Privacidade, incluindo a recolha, partilha e tratamento abrangente dos meus dados pessoais (nome, e-mail, data de nascimento e respostas) para o funcionamento deste teste e para outras finalidades que possam vir a ser definidas.</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg shadow-lg">
+                    Ver Resultado
+                </button>
+            </form>
+        </div>
+
+        <!-- 4. RESULTADOS -->
+        <div id="resultsScreen" class="hidden space-y-6">
+            <div class="glass-card rounded-3xl p-8 md:p-10 shadow-2xl text-center space-y-6">
+                <p id="resultNome" class="text-slate-500 dark:text-slate-400"></p>
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-semibold text-sm">
+                    <i class="fa-solid fa-award"></i> Teu Arquétipo Principal
+                </div>
+                <div id="archetypeIconContainer" class="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white text-3xl shadow-xl">
+                    <i id="archetypeIcon" class="fa-solid fa-lightbulb"></i>
+                </div>
+                <div>
+                    <h2 id="archetitle" class="text-3xl md:text-4xl font-extrabold"></h2>
+                    <p id="archetagline" class="text-indigo-600 dark:text-indigo-400 font-medium text-lg mt-1"></p>
+                </div>
+                <p id="archeDescription" class="text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mx-auto"></p>
+            </div>
+
+            <div class="glass-card rounded-3xl p-6 md:p-8 shadow-xl space-y-4">
+                <h3 class="text-xl font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-chart-simple text-indigo-500"></i> Mapeamento de Traços
+                </h3>
+                <div class="relative w-full max-w-md mx-auto h-64 md:h-72">
+                    <canvas id="traitsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-card rounded-2xl p-6 shadow-md border-l-4 border-emerald-500 space-y-3">
+                    <h4 class="font-bold text-lg text-emerald-600 dark:text-emerald-400">Pontos Fortes</h4>
+                    <ul id="strengthsList" class="space-y-2 text-sm text-slate-600 dark:text-slate-300"></ul>
+                </div>
+                <div class="glass-card rounded-2xl p-6 shadow-md border-l-4 border-amber-500 space-y-3">
+                    <h4 class="font-bold text-lg text-amber-600 dark:text-amber-400">Áreas de Crescimento</h4>
+                    <ul id="improvementsList" class="space-y-2 text-sm text-slate-600 dark:text-slate-300"></ul>
+                </div>
+                <div class="glass-card rounded-2xl p-6 shadow-md border-l-4 border-indigo-500 space-y-3">
+                    <h4 class="font-bold text-lg text-indigo-600 dark:text-indigo-400">Estilo de Comunicação</h4>
+                    <p id="communicationStyle" class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed"></p>
+                </div>
+                <div class="glass-card rounded-2xl p-6 shadow-md border-l-4 border-purple-500 space-y-3">
+                    <h4 class="font-bold text-lg text-purple-600 dark:text-purple-400">Ambiente Ideal</h4>
+                    <p id="idealEnvironment" class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed"></p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                <button onclick="copyResults()" class="flex-1 py-4 px-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold shadow-md">
+                    <i class="fa-solid fa-share-nodes text-indigo-500"></i> Copiar Resultado
+                </button>
+                <button onclick="resetQuiz()" class="flex-1 py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold shadow-lg">
+                    <i class="fa-solid fa-rotate-right"></i> Refazer o Teste
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full text-center py-6 text-xs text-slate-400 dark:text-slate-600">
+        <p>Descobre o Teu Arquétipo © 2026 • Projeto académico</p>
+    </footer>
+
+    <div id="toast" class="fixed bottom-6 right-6 transform translate-y-20 opacity-0 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-5 py-3 rounded-xl shadow-2xl text-sm transition-all duration-300 z-50">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+        const questions = [
+            { text: "Quando enfrento um problema complexo, prefiro analisar dados detalhados antes de tomar qualquer decisão.", trait: "A" },
+            { text: "Costumo gerar ideias originais e fora da caixa, procurando soluções não convencionais.", trait: "C" },
+            { text: "Priorizo o bem-estar e a harmonia das pessoas ao meu redor em relação a prazos ou métricas rígidas.", trait: "E" },
+            { text: "Sinto-me confortável a assumir o controlo de projetos e a guiar a equipa em direção a metas ambiciosas.", trait: "L" },
+            { text: "Aprecio a ordem, a lógica e a otimização de sistemas para evitar falhas ou imprevistos.", trait: "A" }
+        ];
+
+        const archetypes = {
+            A: {
+                title: "O Analista Estratégico",
+                tagline: "Rigoroso, Lógico e Meticuloso",
+                icon: "fa-brain",
+                description: "És impulsionado pela curiosidade intelectual e pelo desejo de compreender como os sistemas funcionam. Destacas-te pela capacidade de desconstruir problemas complexos e tomar decisões fundamentadas em factos.",
+                strengths: ["Pensamento crítico e análise profunda", "Resolução lógica de problemas complexos", "Excelente organização e atenção aos detalhes", "Objetividade sob pressão"],
+                improvements: ["Podes hesitar por excesso de análise", "Dificuldade ocasional em lidar com a imprevisibilidade emocional alheia", "Tendência a ser excessivamente autocrítico"],
+                communication: "Direto, fundamentado e focado na clareza. Preferes dados concretos em vez de palpites.",
+                environment: "Ambientes estruturados, calmos e focados na eficiência, onde o mérito intelectual seja valorizado."
+            },
+            C: {
+                title: "O Empreendedor Criativo",
+                tagline: "Inovador, Intuitivo e Adaptável",
+                icon: "fa-wand-magic-sparkles",
+                description: "Vês o mundo através do prisma de possibilidades infinitas. A tua mente liga conceitos distantes para criar soluções inovadoras.",
+                strengths: ["Grande capacidade de inovação e imaginação", "Excelente flexibilidade e adaptabilidade", "Entusiasmo contagiante por novas ideias", "Habilidade para resolver desafios de forma não convencional"],
+                improvements: ["Tendência a perder interesse após a fase inicial", "Alguma dificuldade em manter rotinas rígidas", "Risco de dispersar o foco em vários projetos"],
+                communication: "Expressivo, inspirador e conceptual. Gostas de discutir ideias abstratas e visões de futuro.",
+                environment: "Locais dinâmicos, informais e flexíveis, que incentivem a experimentação e a liberdade criativa."
+            },
+            E: {
+                title: "O Protetor Empático",
+                tagline: "Atencioso, Colaborativo e Intuitivo",
+                icon: "fa-heart",
+                description: "O teu superpoder é a inteligência emocional. Atuas frequentemente como o elo de união e coesão em qualquer grupo.",
+                strengths: ["Elevada empatia e escuta ativa", "Facilidade na mediação de conflitos", "Lealdade e dedicação ao bem-estar coletivo", "Forte sensibilidade interpessoal"],
+                improvements: ["Tendência a pôr as necessidades dos outros acima das tuas", "Dificuldade em dizer 'não' e estabelecer limites", "Sensibilidade elevada a críticas"],
+                communication: "Acolhedor, atencioso e harmonioso. Priorizas o impacto emocional das palavras e o respeito mútuo.",
+                environment: "Ambientes colaborativos, calorosos e humanos, onde a cooperação seja o foco."
+            },
+            L: {
+                title: "O Líder Visionário",
+                tagline: "Determinado, Convicto e Orientado a Resultados",
+                icon: "fa-crown",
+                description: "Tens uma visão clara de onde queres chegar e a determinação para a transformar em realidade. Tens facilidade em motivar equipas.",
+                strengths: ["Visão estratégica e orientação a objetivos", "Confiança para decidir sob incerteza", "Capacidade de inspirar e mobilizar pessoas", "Foco no progresso e na eficiência"],
+                improvements: ["Impaciência perante processos lentos", "Risco de parecer intransigente", "Necessidade de praticar a delegação"],
+                communication: "Assertivo, persuasivo e orientado à ação. Vais direto ao ponto e focas nos resultados finais.",
+                environment: "Locais desafiantes, de alto rendimento, onde tenhas autonomia para liderar e implementar mudanças."
+            }
+        };
+
+        let currentQuestion = 0;
+        let answers = Array(questions.length).fill(null);
+        let traitsChartInstance = null;
+
+        const $ = id => document.getElementById(id);
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        function showOnly(id) {
+            ['startScreen', 'quizScreen', 'dadosScreen', 'resultsScreen'].forEach(s => {
+                $(s).classList.toggle('hidden', s !== id);
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startQuiz() {
+            currentQuestion = 0;
+            answers = Array(questions.length).fill(null);
+            showOnly('quizScreen');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const total = questions.length;
+            const percent = Math.round(((currentQuestion + 1) / total) * 100);
+            $('questionText').textContent = `${currentQuestion + 1}. ${questions[currentQuestion].text}`;
+            $('questionProgressText').textContent = `Pergunta ${currentQuestion + 1} de ${total}`;
+            $('percentageText').textContent = `${percent}%`;
+            $('progressBar').style.width = `${percent}%`;
+            $('prevBtn').disabled = currentQuestion === 0;
+        }
+
+        function selectOption(score) {
+            answers[currentQuestion] = score;
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showOnly('dadosScreen');
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function mostrarResultado(event) {
+            event.preventDefault();
+            $('resultNome').textContent = `Olá, ${$('nome').value}!`;
+            calculateResults();
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            answers = Array(questions.length).fill(null);
+            $('dadosForm').reset();
+            $('termos').checked = true;
+            showOnly('startScreen');
+            if (traitsChartInstance) traitsChartInstance.destroy();
+        }
+
+        function calculateResults() {
+            const scores = { A: 0, C: 0, E: 0, L: 0 };
+            const counts = { A: 0, C: 0, E: 0, L: 0 };
+
+            answers.forEach((score, index) => {
+                const trait = questions[index].trait;
+                scores[trait] += score;
+                counts[trait]++;
+            });
+
+            // Percentagem por traço, para comparar traços com número de perguntas diferente
+            const percent = {};
+            for (const t of Object.keys(scores)) {
+                percent[t] = counts[t] ? Math.round((scores[t] / (counts[t] * 5)) * 100) : 0;
+            }
+
+            let maxTrait = 'A';
+            for (const t of Object.keys(percent)) {
+                if (percent[t] > percent[maxTrait]) maxTrait = t;
+            }
+
+            const archetype = archetypes[maxTrait];
+            $('archetitle').textContent = archetype.title;
+            $('archetagline').textContent = archetype.tagline;
+            $('archeDescription').textContent = archetype.description;
+            $('archetypeIcon').className = `fa-solid ${archetype.icon}`;
+
+            $('strengthsList').innerHTML = archetype.strengths.map(s =>
+                `<li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span>${s}</span></li>`).join('');
+            $('improvementsList').innerHTML = archetype.improvements.map(i =>
+                `<li class="flex items-start gap-2"><i class="fa-solid fa-arrow-up-right-dots text-amber-500 mt-1"></i><span>${i}</span></li>`).join('');
+
+            $('communicationStyle').textContent = archetype.communication;
+            $('idealEnvironment').textContent = archetype.environment;
+
+            showOnly('resultsScreen');
+            renderChart(percent);
+        }
+
+        function renderChart(percent) {
+            const ctx = $('traitsChart').getContext('2d');
+            if (traitsChartInstance) traitsChartInstance.destroy();
+
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#f1f5f9' : '#334155';
+            const gridColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)';
+
+            traitsChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Analítico', 'Criativo', 'Empático', 'Líder'],
+                    datasets: [{
+                        label: 'Intensidade do Traço (%)',
+                        data: [percent.A, percent.C, percent.E, percent.L],
+                        backgroundColor: 'rgba(99, 102, 241, 0.25)',
+                        borderColor: '#6366f1',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#818cf8'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            min: 0, max: 100,
+                            angleLines: { color: gridColor },
+                            grid: { color: gridColor },
+                            pointLabels: { color: textColor, font: { size: 12, weight: '600' } },
+                            ticks: { display: false }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        function copyResults() {
+            const title = $('archetitle').textContent;
+            const tagline = $('archetagline').textContent;
+            const texto = `O meu Arquétipo de Personalidade é: "${title} - ${tagline}". Descobre o teu também!`;
+            navigator.clipboard.writeText(texto).then(() => showToast("Resultado copiado!"));
+        }
+
+        function showToast(message) {
+            const toast = $('toast');
+            $('toastMessage').textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
+        }
+    </script>
+</body>
+</html>
